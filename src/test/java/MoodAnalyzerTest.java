@@ -8,15 +8,15 @@ public class MoodAnalyzerTest {
 
     @Test
     public void whenGivenSad_shouldReturnSad() {
-        MoodAnalyzer testMoodAnalyzer = new MoodAnalyzer();
-        String message = testMoodAnalyzer.analyse("Sad");
+        MoodAnalyzer testMoodAnalyzer = new MoodAnalyzer("Sad");
+        String message = testMoodAnalyzer.analyse();
         Assert.assertEquals("Sad", message);
     }
 
     @Test
     public void whenGivenHappyMessage_shouldReturnHappy() {
-        MoodAnalyzer moodAnalyser = new MoodAnalyzer();
-        String message = moodAnalyser.analyse("Happy");
+        MoodAnalyzer moodAnalyser = new MoodAnalyzer("Happy");
+        String message = moodAnalyser.analyse();
         Assert.assertEquals("Happy",message);
     }
 
@@ -27,8 +27,8 @@ public class MoodAnalyzerTest {
 
             ExpectedException exceptionRule = ExpectedException.none(); //It used when we write "Exception" in MoodException
             exceptionRule.expect(MoodException.class);
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            String message = moodAnalyzer.analyse(null);
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
+            String message = moodAnalyzer.analyse();
             Assert.assertEquals("Happy", message);
 
             }catch (Exception e){
@@ -40,8 +40,8 @@ public class MoodAnalyzerTest {
     public void whenGivenNull_ShouldReturnNullMessage() {
         try {
 
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            moodAnalyzer.analyse(null);
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
+            moodAnalyzer.analyse();
 
         }catch (MoodException e){
 
@@ -54,8 +54,8 @@ public class MoodAnalyzerTest {
     public void whenGivenEmpty_ShouldReturnMessage() {
         try {
 
-            MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-            moodAnalyzer.analyse("");
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer("");
+            moodAnalyzer.analyse();
 
         }catch (MoodException e){
 

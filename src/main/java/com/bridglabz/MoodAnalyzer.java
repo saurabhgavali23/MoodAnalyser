@@ -1,7 +1,14 @@
 package com.bridglabz;
 
 public class MoodAnalyzer {
-    public String analyse(String message){
+
+    private String message;
+
+    public MoodAnalyzer(String message){
+        this.message = message;
+    }
+
+    public String analyse(){
         try {
 
             if(message.length() == 0)

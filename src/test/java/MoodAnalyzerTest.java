@@ -101,4 +101,25 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(MoodException.ExceptionType.ENTERD_EMPTY,e.type);
         }
     }
+
+    @Test
+    public void givenImproperClassName_ShouldThrow_No_Such_Class_Exception() throws MoodException {
+
+        Constructor<?> constructor = null;
+        try {
+
+            constructor = Class.forName("com.bridglabz.ImproperClass").getConstructor(String.class);
+            Assert.assertEquals("Happy","Happy");
+
+        } catch (ClassNotFoundException e) {
+            try {
+                throw new MoodException(MoodException.ExceptionType.NO_SUCH_CLASS_ERROR,"NO_Such_Class_Error");
+
+            }catch (MoodException m) {
+                m.printStackTrace();
+            }
+            } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
 }

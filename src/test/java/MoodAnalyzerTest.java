@@ -107,19 +107,39 @@ public class MoodAnalyzerTest {
 
         Constructor<?> constructor = null;
         try {
-
             constructor = Class.forName("com.bridglabz.ImproperClass").getConstructor(String.class);
-            Assert.assertEquals("Happy","Happy");
 
         } catch (ClassNotFoundException e) {
             try {
-                throw new MoodException(MoodException.ExceptionType.NO_SUCH_CLASS_ERROR,"NO_Such_Class_Error");
+                throw new MoodException(MoodException.ExceptionType.NO_SUCH_CLASS_ERROR,"No_Such_Class_Error");
 
             }catch (MoodException m) {
                 m.printStackTrace();
+                Assert.assertEquals("No_Such_Class_Error",m.getMessage());
             }
             } catch (NoSuchMethodException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenInvalidConstructorParameter_ShouldThrow_No_Such_Method_Exception() {
+
+        Constructor<?> constructor = null;
+        try {
+
+            constructor = Class.forName("com.bridglabz.MoodAnalyzer").getConstructor(Integer.class);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (NoSuchMethodException e) {
+            try{
+                throw new MoodException(MoodException.ExceptionType.NO_SUCH_METHOD_ERROR,"No_Such_Method");
+            }catch (MoodException m){
+                m.printStackTrace();
+                Assert.assertEquals("No_Such_Method",m.getMessage());
+            }
         }
     }
 }

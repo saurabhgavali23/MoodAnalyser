@@ -25,4 +25,17 @@ public class MoodAnalyserFactory {
         }
         return null;
     }
+
+    public static Constructor getConstructor(Class<?>... parameter) throws NoSuchMethodException, ClassNotFoundException {
+
+        Class moodAnalyserClass = Class.forName("com.bridglabz.MoodAnalyzer");
+        Constructor moodConstructor = moodAnalyserClass.getConstructor(parameter);
+        return moodConstructor;
+    }
+
+    public static Object moodAnalyserGetObject(Constructor constructor,String... message) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        System.out.println(message);
+        Object moodObj = constructor.newInstance(message);
+        return moodObj;
+    }
 }

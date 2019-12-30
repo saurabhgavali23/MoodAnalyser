@@ -142,4 +142,52 @@ public class MoodAnalyzerTest {
             }
         }
     }
+
+    @Test
+    public void whenGivenConstructorWithParameter_ShouldReturnObject() {
+
+        try {
+
+            Constructor constructor = MoodAnalyserFactory.getConstructor(String.class);
+            Object object = MoodAnalyserFactory.moodAnalyserGetObject(constructor,"I am Happy Today");
+            MoodAnalyzer moodAnalyzer = (MoodAnalyzer) object;
+            Assert.assertEquals(true,moodAnalyzer.equals(new MoodAnalyzer("I am Happy Today")));
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void whenGivenConstructorWithoutParameter_ShouldReturnObjec() {
+
+        try {
+
+            Constructor constructor = MoodAnalyserFactory.getConstructor();
+            Object object = MoodAnalyserFactory.moodAnalyserGetObject(constructor);
+            MoodAnalyzer moodAnalyzer = (MoodAnalyzer) object;
+            Assert.assertEquals(true,moodAnalyzer.equals(new MoodAnalyzer()));
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

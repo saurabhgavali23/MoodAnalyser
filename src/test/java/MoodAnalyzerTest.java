@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MoodAnalyzerTest {
 
@@ -188,6 +189,25 @@ public class MoodAnalyzerTest {
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
+    }
 
+    @Test
+    public void whenGivenAnalyseMethod_ToInvoke_ShouldReturnProperMessage() throws InvocationTargetException, IllegalAccessException {
+
+        try {
+
+            Constructor constructor =  MoodAnalyserFactory.getConstructor(String.class);
+            Object object1 = MoodAnalyserFactory.moodAnalyserGetObject(constructor,"Happy");
+            Method method = MoodAnalyzer.class.getDeclaredMethod("analyse");
+            Object object = method.invoke(object1);
+            Assert.assertEquals("Happy",object.toString());
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 }

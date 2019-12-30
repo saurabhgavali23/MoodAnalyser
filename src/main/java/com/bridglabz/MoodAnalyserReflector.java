@@ -1,6 +1,7 @@
 package com.bridglabz;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -58,5 +59,18 @@ public class MoodAnalyserReflector {
         }
 
         return obj;
+    }
+
+    public static Field getField(String fieldName) {
+
+        Field field = null;
+        try {
+             field = Class.forName("com.bridglabz.MoodAnalyzer").getField(fieldName);
+        } catch (NoSuchFieldException e) {
+            throw new MoodException(MoodException.ExceptionType.NO_SUCH_FIELD,"No_Such_Field");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return field;
     }
 }

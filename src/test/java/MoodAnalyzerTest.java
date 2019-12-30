@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -225,5 +226,17 @@ public class MoodAnalyzerTest {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void whenGivenWrongFieldName_ShouldThrowException() {
+
+        try {
+            Field fieldName = MoodAnalyserReflector.getField("massege");
+            Assert.assertEquals("message",fieldName);
+        }catch (MoodException m){
+            m.printStackTrace();
+        }
+
     }
 }

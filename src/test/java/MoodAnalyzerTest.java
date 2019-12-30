@@ -237,6 +237,27 @@ public class MoodAnalyzerTest {
         }catch (MoodException m){
             m.printStackTrace();
         }
+    }
 
+    @Test
+    public void whenGivenNull_PassToReflector_ShouldThrowException() {
+        try {
+
+            Constructor constructor = MoodAnalyserReflector.getConstructor(String.class);
+            Object object = MoodAnalyserReflector.moodAnalyserGetObject(null);
+
+        }catch (MoodException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

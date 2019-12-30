@@ -1,4 +1,4 @@
-import com.bridglabz.MoodAnalyserFactory;
+import com.bridglabz.MoodAnalyserReflector;
 import com.bridglabz.MoodAnalyzer;
 import com.bridglabz.MoodException;
 import org.junit.Assert;
@@ -14,7 +14,7 @@ public class MoodAnalyzerTest {
     @Test
     public void givenMoodAnalyserClass_WhenProper_ShouldReturnObject() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am Happy");
-        MoodAnalyzer moodAnalyzer1 = MoodAnalyserFactory.createMoodAnalyser("I am Happy");
+        MoodAnalyzer moodAnalyzer1 = MoodAnalyserReflector.createMoodAnalyser("I am Happy");
         Assert.assertEquals(true,moodAnalyzer.equals(moodAnalyzer1));
     }
 
@@ -149,8 +149,8 @@ public class MoodAnalyzerTest {
 
         try {
 
-            Constructor constructor = MoodAnalyserFactory.getConstructor(String.class);
-            Object object = MoodAnalyserFactory.moodAnalyserGetObject(constructor,"I am Happy Today");
+            Constructor constructor = MoodAnalyserReflector.getConstructor(String.class);
+            Object object = MoodAnalyserReflector.moodAnalyserGetObject(constructor,"I am Happy Today");
             MoodAnalyzer moodAnalyzer = (MoodAnalyzer) object;
             Assert.assertEquals(true,moodAnalyzer.equals(new MoodAnalyzer("I am Happy Today")));
 
@@ -172,8 +172,8 @@ public class MoodAnalyzerTest {
 
         try {
 
-            Constructor constructor = MoodAnalyserFactory.getConstructor();
-            Object object = MoodAnalyserFactory.moodAnalyserGetObject(constructor);
+            Constructor constructor = MoodAnalyserReflector.getConstructor();
+            Object object = MoodAnalyserReflector.moodAnalyserGetObject(constructor);
             MoodAnalyzer moodAnalyzer = (MoodAnalyzer) object;
             Assert.assertEquals(true,moodAnalyzer.equals(new MoodAnalyzer()));
 
@@ -196,10 +196,9 @@ public class MoodAnalyzerTest {
 
         try {
 
-            Constructor constructor =  MoodAnalyserFactory.getConstructor(String.class);
-            Object object1 = MoodAnalyserFactory.moodAnalyserGetObject(constructor,"Happy");
-            Method method = MoodAnalyzer.class.getDeclaredMethod("analyse");
-            Object object = method.invoke(object1);
+            Constructor constructor =  MoodAnalyserReflector.getConstructor(String.class);
+            Object moodObject = MoodAnalyserReflector.moodAnalyserGetObject(constructor,"Happy");
+            Object object = MoodAnalyserReflector.getMethod("analyse", moodObject);
             Assert.assertEquals("Happy",object.toString());
 
         } catch (NoSuchMethodException e) {

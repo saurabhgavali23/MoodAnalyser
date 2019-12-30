@@ -2,8 +2,9 @@ package com.bridglabz;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-public class MoodAnalyserFactory {
+public class MoodAnalyserReflector {
     public static MoodAnalyzer createMoodAnalyser(String message) {
         try {
 
@@ -37,5 +38,25 @@ public class MoodAnalyserFactory {
         System.out.println(message);
         Object moodObj = constructor.newInstance(message);
         return moodObj;
+    }
+
+    public static Object getMethod(String param,Object moodObject) {
+        Object obj = null;
+        try {
+
+            Class<?> aClass = moodObject.getClass();
+            Method method = aClass.getDeclaredMethod(param);
+            obj = method.invoke(moodObject);
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+         catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
     }
 }

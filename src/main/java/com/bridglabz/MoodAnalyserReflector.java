@@ -49,7 +49,7 @@ public class MoodAnalyserReflector {
             obj = method.invoke(moodObject);
 
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            throw new MoodException(MoodException.ExceptionType.NO_SUCH_METHOD_ERROR,"No_Such_Method");
         }
          catch (IllegalAccessException e) {
             e.printStackTrace();

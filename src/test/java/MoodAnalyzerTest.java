@@ -192,11 +192,11 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void whenGivenAnalyseMethod_ToInvoke_ShouldReturnProperMessage() throws InvocationTargetException, IllegalAccessException {
+    public void whenGivenAnalyseMethod_ToInvoke_ShouldReturnProperMessage() throws IllegalAccessException, InstantiationException, InvocationTargetException {
 
         try {
 
-            Constructor constructor =  MoodAnalyserReflector.getConstructor(String.class);
+            Constructor constructor = MoodAnalyserReflector.getConstructor(String.class);
             Object moodObject = MoodAnalyserReflector.moodAnalyserGetObject(constructor,"Happy");
             Object object = MoodAnalyserReflector.getMethod("analyse", moodObject);
             Assert.assertEquals("Happy",object.toString());
@@ -205,7 +205,24 @@ public class MoodAnalyzerTest {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (InstantiationException e) {
+        }
+    }
+
+    @Test
+    public void whenGivenImproperMethodName_ToInvoke_ShouldThrowException() throws IllegalAccessException, InstantiationException, InvocationTargetException {
+
+        try {
+
+            Constructor constructor = MoodAnalyserReflector.getConstructor(String.class);
+            Object moodObject = MoodAnalyserReflector.moodAnalyserGetObject(constructor, "Happy");
+            Object object = MoodAnalyserReflector.getMethod("ImproperMethod", moodObject);
+            Assert.assertEquals("Happy", object.toString());
+
+        } catch (MoodException m) {
+            m.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
